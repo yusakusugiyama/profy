@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   root to: 'top#index'
   resources :groups, only: [:show, :edit, :update]
   resources :questions, only: [:create]
+  resources :questions,only: [:create, :show]
   resources :answers, only: [:new, :create]
 end
