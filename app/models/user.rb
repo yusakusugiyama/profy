@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
     "#{family_name_kana} #{first_name_kana}"
   end
 
+  def full_profile?
+    avatar? && family_name? && first_name? && family_name_kana? && first_name_kana?
+  end
+
   #accessor
   attr_accessor :group_key
 
@@ -17,6 +21,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable,
          :validatable, :confirmable,
          authentication_keys: [:email, :group_key]
+
+  #paperclip
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>"}
+  validates_attachment_content_type :avatar, content_type: ["image/jpg","image/jpeg","image/png"]
+
 
   #association
   belongs_to :group
