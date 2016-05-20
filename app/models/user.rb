@@ -60,6 +60,11 @@ class User < ActiveRecord::Base
     self.group_id = group.id
   end
 
+  #association
+  belongs_to :group
+  has_many :questions, ->{ order("created_at DESC") }
+  has_many :answers, ->{ order("updated_at DESC") }
+
 
 
 end
